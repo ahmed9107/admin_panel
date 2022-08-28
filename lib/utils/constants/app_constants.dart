@@ -11,7 +11,7 @@ class AppConstants {
   static const String CATEGORIES_DATA_URI         = '/categories_manager/get_categories.php';
   static const String EDIT_CATEGORY_URI           = '/categories_manager/edit_category.php';
   static const String DELETE_CATEGORY_URI         = '/categories_manager/delete_category.php';
-  static const String ADD_CCATEGORI_URI           = '/categories_manager/add_category.php';
+  static const String ADD_CATEGORY_URI            = '/categories_manager/add_category.php';
 }
 
 // https://didishoop.com/public/estore_api/auth/admin_auth/admin_auth.php

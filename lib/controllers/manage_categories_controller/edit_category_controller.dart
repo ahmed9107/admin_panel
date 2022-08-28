@@ -1,7 +1,6 @@
-import 'package:estore_admin_panel/controllers/Category_controller.dart';
+import 'package:estore_admin_panel/controllers/category_controller.dart';
 import 'package:estore_admin_panel/data/repository/category_repo.dart';
-import 'package:estore_admin_panel/data/repository/Category_repo.dart';
-import 'package:estore_admin_panel/models/Category_model.dart';
+import 'package:estore_admin_panel/models/categories_model.dart';
 import 'package:estore_admin_panel/utils/constants/app_constants.dart';
 import 'package:estore_admin_panel/utils/constants/status-request.dart';
 import 'package:estore_admin_panel/utils/functions/handling_data.dart';
@@ -22,13 +21,13 @@ class EditCategoryController extends GetxController{
   List get data => _data;
   StatusRequest statusRequest = StatusRequest.none;
 
-  late CategoryData model;
+  late CategoriesData model;
 
-  editCategory(CategoryData category) async {
+  editCategory(CategoriesData category) async {
     if(fieldValidat()){
       statusRequest = StatusRequest.loading;
       update();
-      model = CategoryData(
+      model = CategoriesData(
         id:     category.id,
         name:   nameController.text.trim(),
         nameAr: nameArController.text.trim(),
@@ -80,9 +79,7 @@ class EditCategoryController extends GetxController{
       update();
       return false;
     }
-    if (imageController.text.trim().isEmpty ||
-      imageController.text.trim().length < 8 ||
-      imageController.text.trim().length > 30) {
+    if (imageController.text.trim().isEmpty) {
       errorMsg = 'Enter a valid image';
       update();
       return false;

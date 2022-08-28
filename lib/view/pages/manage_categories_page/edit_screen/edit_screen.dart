@@ -1,5 +1,5 @@
 import 'package:estore_admin_panel/controllers/manage_categories_controller/edit_category_controller.dart';
-import 'package:estore_admin_panel/models/category_model.dart';
+import 'package:estore_admin_panel/models/categories_model.dart';
 import 'package:estore_admin_panel/view/widgets/big_text.dart';
 import 'package:estore_admin_panel/view/widgets/custom_button.dart';
 import 'package:estore_admin_panel/view/widgets/custom_input_field.dart';
@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class EditScreen extends StatelessWidget {
-  final CategoryData category;
+  final CategoriesData category;
   const EditScreen({Key? key, required this.category}) : super(key: key);
 
   @override

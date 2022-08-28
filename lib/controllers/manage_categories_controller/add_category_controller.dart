@@ -1,39 +1,39 @@
-import 'package:estore_admin_panel/controllers/customer_controller.dart';
-import 'package:estore_admin_panel/data/repository/customer_repo.dart';
+import 'package:estore_admin_panel/controllers/category_controller.dart';
+import 'package:estore_admin_panel/data/repository/category_repo.dart';
 import 'package:estore_admin_panel/utils/constants/app_constants.dart';
 import 'package:estore_admin_panel/utils/constants/status-request.dart';
 import 'package:estore_admin_panel/utils/functions/handling_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AddCustomerController extends GetxController{
+class AddCategoryController extends GetxController{
 
-  final CustomerRepo customerRepo;
-  AddCustomerController({required this.customerRepo});
+  final CategoryRepo categoryRepo;
+  AddCategoryController({required this.categoryRepo});
   
   late TextEditingController nameController;
-  late TextEditingController passwordController;
-  late TextEditingController emailController;
-  late TextEditingController phoneController;
+  late TextEditingController nameArController;
+  late TextEditingController nameFrController;
+  late TextEditingController imageController;
 
   StatusRequest statusRequest = StatusRequest.none;
 
-  addCustomer() async {
+  addCategory() async {
     if(fieldValidat()){
       statusRequest = StatusRequest.loading;
       update();
       Map<String, dynamic> data = {
-        'name'    : nameController.text.trim(),
-        'email'   : emailController.text.trim(),
-        'phone'   : phoneController.text.trim(),
-        'password': passwordController.text.trim(),
+        'name'      : nameController.text.trim(),
+        'name_ar'   : nameArController.text.trim(),
+        'name_fr'   : nameFrController.text.trim(),
+        'image'     : imageController.text.trim(),
       };
-      var response = await customerRepo.postData(AppConstants.ADD_CUSTOMER_URI, data);
+      var response = await categoryRepo.postData(AppConstants.ADD_CATEGORY_URI, data);
       statusRequest = handlingData(response);
       if(statusRequest == StatusRequest.success){
         if(response['status'] == 'success'){
-          Get.find<CustomerController>().getCustomersList();
-          Get.find<CustomerController>().manageCustomerToggleScreen(0);
+          Get.find<CategoryController>().getCategoryList();
+          Get.find<CategoryController>().manageCategoryToggleScreen(0);
         }else{
           Get.snackbar('Faild', 'Phone number or email is already exist',
             backgroundColor: Colors.red.withOpacity(0.5), colorText: Colors.white);
@@ -52,31 +52,29 @@ class AddCustomerController extends GetxController{
   String errorMsg = '';
 
   bool fieldValidat(){
-    if (!GetUtils.isEmail(emailController.text.trim()) || emailController.text.trim().isEmpty){
-      errorMsg = 'Enter a valid email';
-      update();
-      return false;
-    }
-    if (!GetUtils.isUsername(nameController.text.trim()) ||
-      nameController.text.trim().isEmpty ||
+    if (nameController.text.trim().isEmpty ||
       nameController.text.trim().length < 3 ||
       nameController.text.trim().length > 20){
       errorMsg = 'Enter a valid name';
       update();
       return false;
     }
-    if (!GetUtils.isPhoneNumber(phoneController.text.trim()) ||
-      phoneController.text.trim().isEmpty ||
-      phoneController.text.trim().length < 6 ||
-      phoneController.text.trim().length > 20){
-      errorMsg = 'Enter a valid Phone number';
+    if (nameArController.text.trim().isEmpty ||
+      nameArController.text.trim().length < 3 ||
+      nameArController.text.trim().length > 20){
+      errorMsg = 'Enter a valid name';
       update();
       return false;
     }
-    if (passwordController.text.trim().isEmpty ||
-      passwordController.text.trim().length < 8 ||
-      passwordController.text.trim().length > 30){
-      errorMsg = 'Enter a valid password';
+    if (nameFrController.text.trim().isEmpty ||
+      nameFrController.text.trim().length < 3 ||
+      nameFrController.text.trim().length > 20){
+      errorMsg = 'Enter a valid name';
+      update();
+      return false;
+    }
+    if (imageController.text.trim().isEmpty){
+      errorMsg = 'Enter a valid Phone number';
       update();
       return false;
     }
@@ -85,19 +83,19 @@ class AddCustomerController extends GetxController{
 
   @override
   void onInit() {
-    nameController      = TextEditingController();
-    emailController     = TextEditingController();
-    phoneController     = TextEditingController();
-    passwordController  = TextEditingController();
+    nameController    = TextEditingController();
+    nameArController  = TextEditingController();
+    nameFrController  = TextEditingController();
+    imageController   = TextEditingController();
     super.onInit();
   }
 
   @override
   void dispose() {
     nameController.dispose();
-    emailController.dispose();
-    phoneController.dispose();
-    passwordController.dispose();
+    nameArController.dispose();
+    nameFrController.dispose();
+    imageController.dispose();
     super.dispose();
   }
 }

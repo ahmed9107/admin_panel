@@ -1,4 +1,4 @@
-import 'package:estore_admin_panel/controllers/manage_customers_controllers/add_customer_controller.dart';
+import 'package:estore_admin_panel/controllers/manage_categories_controller/add_category_controller.dart';
 import 'package:estore_admin_panel/view/widgets/big_text.dart';
 import 'package:estore_admin_panel/view/widgets/custom_button.dart';
 import 'package:estore_admin_panel/view/widgets/custom_input_field.dart';
@@ -11,7 +11,7 @@ class AddScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder<AddCustomerController>(
+      body: GetBuilder<AddCategoryController>(
         builder: (controller) {
           return Padding(
             padding: const EdgeInsets.all(15),
@@ -20,36 +20,36 @@ class AddScreen extends StatelessWidget {
                 const BigText(text: 'Add Customer'),
                 const SizedBox(height: 20),
                 CustomInputField(
-                  controller: controller.emailController,
-                  type: TextInputType.emailAddress,
-                  hint: 'Enter customer email',
-                  bgColor: Theme.of(context).backgroundColor
-                ),
-                const SizedBox(height: 20),
-                CustomInputField(
                   controller: controller.nameController,
                   type: TextInputType.text,
-                  hint: 'Enter customer name',
+                  hint: 'Enter category english name',
                   bgColor: Theme.of(context).backgroundColor
                 ),
                 const SizedBox(height: 20),
                 CustomInputField(
-                  controller: controller.phoneController,
-                  type: TextInputType.number,
-                  hint: 'Enter phone number',
-                  bgColor: Theme.of(context).backgroundColor
-                ),
-                const SizedBox(height: 20),
-                CustomInputField(
-                  controller: controller.passwordController,
+                  controller: controller.nameArController,
                   type: TextInputType.text,
-                  hint: 'Enter password',
+                  hint: 'Enter category arabic name',
+                  bgColor: Theme.of(context).backgroundColor
+                ),
+                const SizedBox(height: 20),
+                CustomInputField(
+                  controller: controller.nameFrController,
+                  type: TextInputType.text,
+                  hint: 'Enter category french name',
+                  bgColor: Theme.of(context).backgroundColor
+                ),
+                const SizedBox(height: 20),
+                CustomInputField(
+                  controller: controller.imageController,
+                  type: TextInputType.text,
+                  hint: 'Image',
                   bgColor: Theme.of(context).backgroundColor
                 ),
                 const SizedBox(height: 20),
                 CustomButtonAuth(
                   onPressed: (){
-                    controller.addCustomer();
+                    controller.addCategory();
                   },
                   text: 'Submit',
                 ),

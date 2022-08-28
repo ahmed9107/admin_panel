@@ -1,5 +1,5 @@
 import 'package:estore_admin_panel/data/repository/category_repo.dart';
-import 'package:estore_admin_panel/models/category_model.dart';
+import 'package:estore_admin_panel/models/categories_model.dart';
 import 'package:estore_admin_panel/utils/constants/app_constants.dart';
 import 'package:estore_admin_panel/utils/constants/status-request.dart';
 import 'package:estore_admin_panel/utils/functions/handling_data.dart';
@@ -10,8 +10,8 @@ class CategoryController extends GetxController{
 
   final CategoryRepo categoryRepo;
   CategoryController({required this.categoryRepo});
-  List<CategoryData> _categoryList = [];
-  List<CategoryData> get categoryList => _categoryList;
+  List<CategoriesData> _categoryList = [];
+  List<CategoriesData> get categoryList => _categoryList;
   StatusRequest statusRequest = StatusRequest.none;
 
   Future<void> getCategoryList() async {
@@ -22,7 +22,7 @@ class CategoryController extends GetxController{
     if (statusRequest == StatusRequest.success) {
       if(response['status'] == 'success'){
         _categoryList = [];
-        _categoryList.addAll(CategoryModel.fromJson(response).data!);
+        _categoryList.addAll(CategoryModel.fromJson(response).categoryData);
         update();
       } else {
         Get.snackbar('Faild', 'Faild to get data!',
@@ -31,16 +31,16 @@ class CategoryController extends GetxController{
     } else {}
   }
 
-  CategoryData? category;
+  CategoriesData? category;
   int currentScreen = 0;
 
-  void manageCategoryToggleScreen(int index, {CategoryData? categoryData}){
+  void manageCategoryToggleScreen(int index, {CategoriesData? categoryData}){
     currentScreen = index;
     category = categoryData;
     update();
   }
 
-  Future<void> deleteCategory(CategoryData categoryData) async {
+  Future<void> deleteCategory(CategoriesData categoryData) async {
     statusRequest = StatusRequest.loading;
     update();
     var response = await categoryRepo.postData(AppConstants.DELETE_CATEGORY_URI, {'categoryid': categoryData.id});
