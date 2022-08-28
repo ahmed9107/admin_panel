@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 class CustomButtonAuth extends StatelessWidget {
   final String text;
   final void Function()? onPressed;
-  const CustomButtonAuth({Key? key, required this.text, this.onPressed})
+  final double width;
+  const CustomButtonAuth({
+    Key? key,
+    required this.text, this.onPressed, this.width = double.maxFinite})
       : super(key: key);
 
   @override
@@ -14,10 +17,10 @@ class CustomButtonAuth extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(
           top: 10,
-          left: 10,
-          right:10
+          left: 15,
+          right:15
         ),
-        width: double.maxFinite,
+        width: width,
         height: 50*1.1,
         //padding: EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(

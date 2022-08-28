@@ -7,8 +7,8 @@ class LoginRepo{
 
   LoginRepo({required this.apiClient/* , required this.sharedPref */});
 
-  postData(String email, String password) async {
-    var response = await apiClient.postData(AppConstants.LOGIN_URI, {'email': email, 'password': password});
+  postData(String name, String password) async {
+    var response = await apiClient.postData(AppConstants.LOGIN_URI, {'name': name, 'password': password});
     return response.fold((l) => l, (r) => r);
   }
 }

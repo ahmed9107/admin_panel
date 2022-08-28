@@ -1,14 +1,14 @@
 import 'package:estore_admin_panel/controllers/auth_controllers/edit_profile_controller.dart';
 import 'package:estore_admin_panel/controllers/auth_controllers/login_controller.dart';
+import 'package:estore_admin_panel/controllers/customer_controller.dart';
+import 'package:estore_admin_panel/controllers/manage_customers_controllers/add_customer_controller.dart';
+import 'package:estore_admin_panel/controllers/manage_customers_controllers/edit_customer_controller.dart';
 import 'package:estore_admin_panel/controllers/layout_controller.dart';
 import 'package:estore_admin_panel/data/api/api_client.dart';
-import 'package:estore_admin_panel/data/repository/auth/forgetpass_verify_repo.dart';
 import 'package:estore_admin_panel/data/repository/auth/login_repo.dart';
-import 'package:estore_admin_panel/data/repository/auth/resetpass_repo.dart';
+import 'package:estore_admin_panel/data/repository/customer_repo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
-
-import '../../data/repository/auth/check_email_repo.dart';
 
 class InitialBindings extends Bindings{
   @override
@@ -21,13 +21,14 @@ class InitialBindings extends Bindings{
 
     // Repository
     Get.lazyPut(() => LoginRepo(apiClient: Get.find()), fenix: true);
-    Get.lazyPut(() => CheckEmailRepo(apiClient: Get.find()), fenix: true);
-    Get.lazyPut(() => ForgetPassVerifyRepo(apiClient: Get.find()), fenix: true);
-    Get.lazyPut(() => ResetPassRepo(apiClient: Get.find()), fenix: true);
+    Get.lazyPut(() => CustomerRepo(apiClient: Get.find()), fenix: true);
 
     // Controllers
     Get.lazyPut(() => EditProfileController(), fenix: true);
     Get.lazyPut(() => LayoutController(), fenix: true);
     Get.lazyPut(() => LoginController(loginRepo: Get.find()), fenix: true);
+    Get.lazyPut(() => CustomerController(customerRepo: Get.find()), fenix: true);
+    Get.lazyPut(() => EditCustomerController(customerRepo: Get.find()), fenix: true);
+    Get.lazyPut(() => AddCustomerController(customerRepo: Get.find()), fenix: true);
   }
 }

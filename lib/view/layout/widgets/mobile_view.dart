@@ -64,7 +64,7 @@ class MobileView extends StatelessWidget {
                 icon: Icon(controller.selectedScreen == 0
                   ? EvaIcons.home : EvaIcons.homeOutline), label: 'home'.tr),
               BottomNavigationBarItem(
-                icon: Icon( controller.selectedScreen == 1
+                icon: Icon(controller.selectedScreen == 1
                   ? EvaIcons.pricetags: EvaIcons.pricetagsOutline), label: 'Products'),
               BottomNavigationBarItem(
                 icon: Icon(controller.selectedScreen == 2

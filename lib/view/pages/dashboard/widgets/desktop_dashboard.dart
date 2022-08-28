@@ -16,33 +16,55 @@ class DesktopDashboard extends StatelessWidget {
         color: Theme.of(context).scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(5)
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: double.maxFinite,
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Row(
-                    children: [
-                      Expanded(child: AnalyticInfoCard(info:analyticData[0])),
-                      const SizedBox(width:10),
-                      Expanded(child: AnalyticInfoCard(info:analyticData[1])),
-                      const SizedBox(width:10),
-                      Expanded(child: AnalyticInfoCard(info:analyticData[2])),
-                      const SizedBox(width:10),
-                      Expanded(child: AnalyticInfoCard(info:analyticData[3])),
-                    ]
-                  ),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: double.maxFinite,
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  children: [
+                    Expanded(child: AnalyticInfoCard(info:analyticData[0])),
+                    const SizedBox(width:10),
+                    Expanded(child: AnalyticInfoCard(info:analyticData[1])),
+                    const SizedBox(width:10),
+                    Expanded(child: AnalyticInfoCard(info:analyticData[2])),
+                    const SizedBox(width:10),
+                    Expanded(child: AnalyticInfoCard(info:analyticData[3])),
+                  ]
                 ),
               ),
-              Row(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 10),
+            ),
+            Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).backgroundColor,
+                    borderRadius: BorderRadius.circular(5)
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const BigText(
+                        text: "Revenue Chart",
+                        size: 20,
+                        color: Color(0xFFA4A6B3),
+                      ),
+                      SizedBox(
+                        width: 600,
+                        height: 350,
+                        child: SimpleBarChart.withSampleData()
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 10),
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: Theme.of(context).backgroundColor,
@@ -52,21 +74,28 @@ class DesktopDashboard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         const BigText(
-                          text: "Revenue Chart",
+                          text: "Pie Chart",
                           size: 20,
                           color: Color(0xFFA4A6B3),
                         ),
                         SizedBox(
-                          width: 600,
                           height: 350,
-                          child: SimpleBarChart.withSampleData()
+                          child: SimplePieChart.withSampleData()
                         ),
                       ],
                     ),
                   ),
+                ),
+              ],
+            ),
+            const SizedBox(height:10.0),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   Expanded(
                     child: Container(
-                      margin: const EdgeInsets.only(right: 10),
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: Theme.of(context).backgroundColor,
@@ -74,61 +103,29 @@ class DesktopDashboard extends StatelessWidget {
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const BigText(
-                            text: "Pie Chart",
+                        children: const [
+                          BigText(
+                            text: "Top Orders",
                             size: 20,
                             color: Color(0xFFA4A6B3),
                           ),
                           SizedBox(
-                            height: 350,
-                            child: SimplePieChart.withSampleData()
+                            height: 350
                           ),
                         ],
                       ),
                     ),
                   ),
-                ],
+                  const SizedBox(width:10.0),
+                  const Expanded(
+                    child: TopUsers()
+                  ),
+                ]
               ),
-              const SizedBox(height:10.0),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).backgroundColor,
-                          borderRadius: BorderRadius.circular(5)
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: const [
-                            BigText(
-                              text: "Top Orders",
-                              size: 20,
-                              color: Color(0xFFA4A6B3),
-                            ),
-                            SizedBox(
-                              height: 350
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width:10.0),
-                    const Expanded(
-                      child: TopUsers()
-                    ),
-                  ]
-                ),
-              ),
-              const SizedBox(height:10.0),
-            ],
-          ),
-        ],
+            ),
+            const SizedBox(height:10.0),
+          ],
+        ),
       ),
     );
   }

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class OnHoverButton extends StatefulWidget {
   final Widget child;
-  const OnHoverButton({Key? key, required this.child}) : super(key: key);
+  final Color? color;
+  const OnHoverButton({Key? key, required this.child, this.color}) : super(key: key);
 
   @override
   State<OnHoverButton> createState() => _OnHoverButtonState();
@@ -16,7 +17,10 @@ class _OnHoverButtonState extends State<OnHoverButton> {
     final transform = isHovered ? hoverTransform : Matrix4.identity();
     return Container(
       //height: 55,
-      color: isHovered ? Theme.of(context).scaffoldBackgroundColor : null,
+      color: isHovered 
+        ? Theme.of(context).scaffoldBackgroundColor 
+          : widget.color != null 
+          ? widget.color! : null,
       child: MouseRegion(
         onEnter: (event)=> onEntered(true),
         onExit: (event)=> onEntered(false),

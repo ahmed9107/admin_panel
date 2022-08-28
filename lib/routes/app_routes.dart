@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 class AppRoute {
   static const String chatPage            = "/chat";
-  static const String editProfilePage     = "/edit-profile";
+  //static const String editCustomerPage     = "/edit-customer";
   static const String initial             = "/layout";
   static const String login               = "/";
   static const String notificationPage    = "/notification";
@@ -13,7 +13,7 @@ class AppRoute {
   static String getInitial() => initial;
   static String getSearchPage() => searchPage;
   static String getChatPage() => chatPage;
-  static String getEditProfilePage() => editProfilePage;
+  //static String getEditCustomerPage() => editCustomerPage;
   static String getNotificationPage() => notificationPage;
   static String getLogin() => login;
 
@@ -29,11 +29,13 @@ class AppRoute {
       transition: Transition.fadeIn),
     
     /* GetPage(
-      name: chatPage,
-      page: () => const ChatPage(),
-      transition: Transition.fadeIn),
+      name: editCustomerPage,
+      page: () {
+        CustomerData editCustomerPage = Get.arguments;
+        return EditScreen(customer: editCustomerPage);},
+      transition: Transition.fadeIn), */
 
-    GetPage(
+    /* GetPage(
       name: searchPage,
       page: () => const SearchPage(),
       transition: Transition.fadeIn), */

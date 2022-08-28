@@ -7,12 +7,12 @@ import 'package:get/get.dart';
 
 class LoginController extends GetxController {
   final LoginRepo loginRepo;
-  late TextEditingController emailController;
+  late TextEditingController nameController;
   late TextEditingController passwordController;
   LoginController({required this.loginRepo});
 
-  bool _emailError = false;
-  bool get emailError => _emailError;
+  bool _nameError = false;
+  bool get nameError => _nameError;
   
   bool _emptyError = false;
   bool get emptyError => _emptyError;
@@ -23,7 +23,7 @@ class LoginController extends GetxController {
     if(fieldValidat()){
       statusRequest = StatusRequest.loading;
       update();
-      var response = await loginRepo.postData(emailController.text.trim(), passwordController.text.trim());
+      var response = await loginRepo.postData(nameController.text.trim(), passwordController.text.trim());
       statusRequest = handlingData(response);
       if(statusRequest == StatusRequest.success){
         if(response['status'] == 'success'){
@@ -33,7 +33,7 @@ class LoginController extends GetxController {
             backgroundColor: Colors.red.withOpacity(0.5), colorText: Colors.white);
         }
       } else {
-        Get.snackbar('Faild', errorMsg,
+        Get.snackbar('Faild', '$statusRequest',
           backgroundColor: Colors.red.withOpacity(0.5), colorText: Colors.white);
       }
       update();
@@ -43,14 +43,14 @@ class LoginController extends GetxController {
   String errorMsg = '';
 
   bool fieldValidat(){
-    if (!GetUtils.isEmail(emailController.text.trim()) || emailController.text.trim().isEmpty) {
-      _emailError = true;
-      errorMsg = 'Enter your email';
+    if (!GetUtils.isUsername(nameController.text.trim())) {
+      _nameError = false;
+      errorMsg = 'Enter a valid name';
       update();
       return false;
     }
-    if (emailController.text.trim().isEmpty || passwordController.text.trim().isEmpty) {
-      _emailError = false;
+    if (nameController.text.trim().isEmpty || passwordController.text.trim().isEmpty) {
+      _nameError = false;
       _emptyError = true;
       errorMsg = 'Enter your password';
       update();
@@ -68,14 +68,14 @@ class LoginController extends GetxController {
 
   @override
   void onInit() {
-    emailController = TextEditingController();
+    nameController = TextEditingController();
     passwordController = TextEditingController();
     super.onInit();
   }
 
   @override
   void dispose() {
-    emailController.dispose();
+    nameController.dispose();
     passwordController.dispose();
     super.dispose();
   }

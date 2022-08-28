@@ -15,6 +15,7 @@ class TabletView extends StatelessWidget {
       body: GetBuilder<LayoutController>(
         builder: (controller) {
           return Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               NavigationRail(
                 backgroundColor: Theme.of(context).backgroundColor,
@@ -22,28 +23,36 @@ class TabletView extends StatelessWidget {
                 onDestinationSelected: (int index)=> controller.onTapNavBar(index),
                 destinations: [
                   NavigationRailDestination(
-                    icon: Icon(EvaIcons.home, color: Theme.of(context).primaryColorLight),
+                    icon: Icon(controller.selectedScreen == 0
+                      ? EvaIcons.home : EvaIcons.homeOutline, color: Theme.of(context).primaryColorLight),
                     label: const Text('Dashboard')
                   ),
                   NavigationRailDestination(
-                    icon: Icon(EvaIcons.pricetagsOutline, color: Theme.of(context).primaryColorLight),
+                    icon: Icon(controller.selectedScreen == 1
+                      ? EvaIcons.pricetags: EvaIcons.pricetagsOutline, color: Theme.of(context).primaryColorLight),
                     label: const Text('products')
                   ),
                   NavigationRailDestination(
-                    icon: Icon(EvaIcons.shoppingCart, color: Theme.of(context).primaryColorLight),
+                    icon: Icon(controller.selectedScreen == 2
+                      ? EvaIcons.shoppingCart : EvaIcons.shoppingCartOutline, color: Theme.of(context).primaryColorLight),
                     label: const Text('Orders')
                   ),
                   NavigationRailDestination(
-                    icon: Icon(EvaIcons.person, color: Theme.of(context).primaryColorLight),
+                    icon: Icon(controller.selectedScreen == 3
+                      ? EvaIcons.person : EvaIcons.personOutline, color: Theme.of(context).primaryColorLight),
                     label: const Text('Customers')
                   ),
                   NavigationRailDestination(
-                    icon: Icon(EvaIcons.messageCircleOutline, color: Theme.of(context).primaryColorLight),
+                    icon: Icon(controller.selectedScreen == 4
+                      ? EvaIcons.messageCircle : EvaIcons.messageCircleOutline, color: Theme.of(context).primaryColorLight),
                     label: const Text('Messages')
                   ),
                 ],
               ),
-              Expanded(child: controller.screens[controller.selectedScreen]),
+              Expanded(child: Padding(
+                padding: const EdgeInsets.only(top: 5.0),
+                child: controller.screens[controller.selectedScreen],
+              )),
             ],
           );
         }

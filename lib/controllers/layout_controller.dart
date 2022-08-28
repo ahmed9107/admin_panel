@@ -1,4 +1,5 @@
 import 'package:estore_admin_panel/view/pages/dashboard/dashboard.dart';
+import 'package:estore_admin_panel/view/pages/manage_customers_page/manage_customers_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,13 +20,14 @@ class LayoutController extends GetxController{
         'Manage Categories'
       )
     ),
-    Container(
+    /* Container(
       color: Colors.blue.shade100,
       alignment: Alignment.center,
       child: const Text(
         'Manage customers'
       )
-    ),
+    ), */
+    const ManageCustomers(),
     Container(
       color: Colors.purple.shade100,
       alignment: Alignment.center,

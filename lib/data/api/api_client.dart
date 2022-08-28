@@ -26,7 +26,7 @@ class ApiClient{
       } else {
         return const Left(StatusRequest.offlineFailure);
       }
-    } catch (_) {
+    } catch (e) {
       return const Left(StatusRequest.serverFailure);
     }
   }

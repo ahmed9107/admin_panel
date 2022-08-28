@@ -16,23 +16,19 @@ class _DesktopBodyState extends State<DesktopBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+      //backgroundColor: Theme.of(context).backgroundColor,
       appBar: const TopNavBar(),
       body: GetBuilder<LayoutController>(
         builder: (controller) {
-          return SingleChildScrollView(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Expanded(
-                  child: MainDrawer()
-                ),
-                Expanded(
-                  flex: 5,
-                  child: controller.screens[controller.selectedScreen]
-                ),
-              ],
-            ),
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Expanded(child: MainDrawer()),
+              Expanded(
+                flex: 5,
+                child: controller.screens[controller.selectedScreen]
+              ),
+            ],
           );
         }
       )

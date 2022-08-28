@@ -12,52 +12,69 @@ class MainDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<LayoutController>(
       builder: (controller) {
-        return Container(
-          //elevation: 0,
-          color: Theme.of(context).backgroundColor,
-          child: Column(children: [
-            OnHoverButton(
-              child: ListTile(
-                onTap: ()=> controller.onTapNavBar(0),
-                leading: Icon(EvaIcons.shoppingCart, color: Theme.of(context).primaryColorLight),
-                title: const SmallText(text: 'Dashboard', size: 12),
+        return Drawer(
+          backgroundColor: Theme.of(context).backgroundColor,
+          elevation: 0.0,
+          child: Column(
+            children: [
+              OnHoverButton(
+                color: controller.selectedScreen == 0
+                    ? Theme.of(context).scaffoldBackgroundColor : null, 
+                child: ListTile(
+                  onTap: ()=> controller.onTapNavBar(0),
+                  leading: Icon(controller.selectedScreen == 0
+                    ? EvaIcons.home : EvaIcons.homeOutline, color: Theme.of(context).primaryColorLight),
+                  title: const SmallText(text: 'Dashboard', size: 12),
+                ),
               ),
-            ),
-            OnHoverButton(
-              child: ListTile(
-                onTap: ()=> controller.onTapNavBar(1),
-                leading: Icon(EvaIcons.pricetagsOutline, color: Theme.of(context).primaryColorLight),
-                title: const SmallText(text: 'Products Manager', size: 12),
+              OnHoverButton(
+                color: controller.selectedScreen == 1
+                    ? Theme.of(context).scaffoldBackgroundColor : null,
+                child: ListTile(
+                  onTap: ()=> controller.onTapNavBar(1),
+                  leading: Icon(controller.selectedScreen == 1
+                    ? EvaIcons.pricetags: EvaIcons.pricetagsOutline, color: Theme.of(context).primaryColorLight),
+                  title: const SmallText(text: 'Products Manager', size: 12),
+                ),
               ),
-            ),
-            OnHoverButton(
-              child: ListTile(
-                onTap: ()=> controller.onTapNavBar(2),
-                leading: Icon(EvaIcons.gridOutline, color: Theme.of(context).primaryColorLight),
-                title: const SmallText(text: 'Category Manager', size: 12),
+              OnHoverButton(
+                color: controller.selectedScreen == 2
+                    ? Theme.of(context).scaffoldBackgroundColor : null, 
+                child: ListTile(
+                  onTap: ()=> controller.onTapNavBar(2),
+                  leading: Icon(controller.selectedScreen == 2
+                    ? EvaIcons.shoppingCart : EvaIcons.shoppingCartOutline, color: Theme.of(context).primaryColorLight),
+                  title: const SmallText(text: 'Category Manager', size: 12),
+                ),
               ),
-            ),
-            OnHoverButton(
-              child: ListTile(
-                onTap: ()=> controller.onTapNavBar(3),
-                leading: Icon(EvaIcons.person, color: Theme.of(context).primaryColorLight),
-                title: const SmallText(text: 'Customer Manager', size: 12),
+              OnHoverButton(
+                color: controller.selectedScreen == 3
+                    ? Theme.of(context).scaffoldBackgroundColor : null,
+                child: ListTile(
+                  onTap: ()=> controller.onTapNavBar(3),
+                  leading: Icon(controller.selectedScreen == 3
+                    ? EvaIcons.person : EvaIcons.personOutline, color: Theme.of(context).primaryColorLight),
+                  title: const SmallText(text: 'Customer Manager', size: 12),
+                ),
               ),
-            ),
-            OnHoverButton(
-              child: ListTile(
-                onTap: ()=> controller.onTapNavBar(4),
-                leading: Icon(EvaIcons.messageCircleOutline, color: Theme.of(context).primaryColorLight),
-                title: const SmallText(text: 'Messages', size: 12),
+              OnHoverButton(
+                color: controller.selectedScreen == 4
+                    ? Theme.of(context).scaffoldBackgroundColor : null, 
+                child: ListTile(
+                  onTap: ()=> controller.onTapNavBar(4),
+                  leading: Icon(controller.selectedScreen == 4
+                    ? EvaIcons.messageCircle : EvaIcons.messageCircleOutline, color: Theme.of(context).primaryColorLight),
+                  title: const SmallText(text: 'Messages', size: 12),
+                ),
               ),
-            ),
-            const OnHoverButton(
-              child: ListTile(
-                leading: Icon(Icons.logout, color: Colors.red),
-                title: SmallText(text: 'Logout', size: 12, color: Colors.red),
+              const OnHoverButton(
+                child: ListTile(
+                  leading: Icon(Icons.logout, color: Colors.red),
+                  title: SmallText(text: 'Logout', size: 12, color: Colors.red),
+                ),
               ),
-            ),
-          ]),
+            ]
+          ),
         );
       }
     );
