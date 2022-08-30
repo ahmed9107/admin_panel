@@ -1,4 +1,4 @@
-import 'package:estore_admin_panel/controllers/customer_controller.dart';
+import 'package:estore_admin_panel/controllers/manage_customers_controllers/customer_controller.dart';
 import 'package:estore_admin_panel/data/repository/customer_repo.dart';
 import 'package:estore_admin_panel/utils/constants/app_constants.dart';
 import 'package:estore_admin_panel/utils/constants/status-request.dart';

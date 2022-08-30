@@ -1,4 +1,6 @@
-import 'package:estore_admin_panel/controllers/customer_controller.dart';
+import 'package:estore_admin_panel/controllers/layout_controller.dart';
+import 'package:estore_admin_panel/controllers/manage_customers_controllers/customer_controller.dart';
+import 'package:estore_admin_panel/utils/class/custom-scroll_behavior.dart';
 import 'package:estore_admin_panel/utils/helpers/dependencies.dart';
 import 'package:estore_admin_panel/utils/theme/theme.dart';
 import 'package:estore_admin_panel/view/layout/layout.dart';
@@ -18,12 +20,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<CustomerController>(
       builder: (_) {
-        return GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: Themes.dark,
-          darkTheme: Themes.dark,
-          //getPages: AppRoute.routes,
-          home: const Layout(),
+        return GetBuilder<LayoutController>(
+          builder: (layoutController) {
+            return GetMaterialApp(
+              scrollBehavior: CustomScrollBehavior(),
+              debugShowCheckedModeBanner: false,
+              theme: Themes.light,
+              darkTheme: Themes.dark,
+              themeMode: layoutController.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+              //getPages: AppRoute.routes,
+              home: const Layout(),
+            );
+          }
         );
       }
     );

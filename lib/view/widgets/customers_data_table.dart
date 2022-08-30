@@ -1,4 +1,4 @@
-import 'package:estore_admin_panel/controllers/customer_controller.dart';
+import 'package:estore_admin_panel/controllers/manage_customers_controllers/customer_controller.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

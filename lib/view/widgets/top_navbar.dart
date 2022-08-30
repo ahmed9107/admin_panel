@@ -1,7 +1,9 @@
+import 'package:estore_admin_panel/controllers/layout_controller.dart';
 import 'package:estore_admin_panel/view/widgets/big_text.dart';
 import 'package:estore_admin_panel/view/widgets/small_text.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class TopNavBar extends StatelessWidget  with PreferredSizeWidget{
   const TopNavBar({Key? key}) : super(key: key);
@@ -19,6 +21,17 @@ class TopNavBar extends StatelessWidget  with PreferredSizeWidget{
       actions: [
         Row(
           children: [
+            GetBuilder<LayoutController>(
+              builder: (controller) {
+                return InkWell(
+                  onTap: (){
+                    controller.switchTheme();
+                  },
+                  child: Icon(EvaIcons.moon, color:Theme.of(context).primaryColorLight)
+                );
+              }
+            ),
+            const SizedBox(width:10),
             InkWell(
               onTap: (){},
               child: Icon(EvaIcons.bellOutline, color:Theme.of(context).primaryColorLight)

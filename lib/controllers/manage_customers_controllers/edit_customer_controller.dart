@@ -1,4 +1,4 @@
-import 'package:estore_admin_panel/controllers/customer_controller.dart';
+import 'package:estore_admin_panel/controllers/manage_customers_controllers/customer_controller.dart';
 import 'package:estore_admin_panel/data/repository/customer_repo.dart';
 import 'package:estore_admin_panel/models/customer_model.dart';
 import 'package:estore_admin_panel/models/manage_customer_model.dart';
@@ -66,19 +66,10 @@ class EditCustomerController extends GetxController{
     }
   }
 
-  bool _emailError = false;
-  bool get emailError => _emailError;
-  bool _nameError = false;
-  bool get nameError => _nameError;
-  bool _phoneError = false;
-  bool get phoneError => _phoneError;
-  bool _passError = false;
-  bool get passError => _passError;
   String errorMsg = '';
 
   bool fieldValidat(){
     if (!GetUtils.isEmail(emailController.text.trim()) || emailController.text.trim().isEmpty) {
-      _emailError = true;
       errorMsg = 'Enter a valid email';
       update();
       return false;
@@ -87,8 +78,6 @@ class EditCustomerController extends GetxController{
       nameController.text.trim().isEmpty ||
       nameController.text.trim().length < 3 ||
       nameController.text.trim().length > 20) {
-      _emailError = false;
-      _nameError = true;
       errorMsg = 'Enter a valid name';
       update();
       return false;
@@ -97,9 +86,6 @@ class EditCustomerController extends GetxController{
         phoneController.text.trim().isEmpty ||
         phoneController.text.trim().length < 6 ||
         phoneController.text.trim().length > 20) {
-      _emailError = false;
-      _nameError = false;
-      _phoneError = true;
       errorMsg = 'Enter a valid Phone number';
       update();
       return false;
@@ -107,10 +93,6 @@ class EditCustomerController extends GetxController{
     if (passwordController.text.trim().isNotEmpty &&
       passwordController.text.trim().length < 8 ||
       passwordController.text.trim().length > 30) {
-      _emailError = false;
-      _nameError  = false;
-      _phoneError = false;
-      _passError  = true;
       errorMsg = 'Enter a valid password';
       update();
       return false;
@@ -120,10 +102,13 @@ class EditCustomerController extends GetxController{
 
   @override
   void onInit() {
-    nameController  = TextEditingController();
-    emailController = TextEditingController();
-    phoneController = TextEditingController();
-    passwordController = TextEditingController();
+    nameController       = TextEditingController();
+    emailController      = TextEditingController();
+    phoneController      = TextEditingController();
+    passwordController   = TextEditingController();
+    emailController.text = Get.find<CustomerController>().customer!.email!;
+    nameController.text  = Get.find<CustomerController>().customer!.name!;
+    phoneController.text = Get.find<CustomerController>().customer!.phone!;
     super.onInit();
   }
 

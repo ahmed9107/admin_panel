@@ -66,7 +66,7 @@ class MobileLogin extends StatelessWidget {
                     showPass: () {controller.showPassword();},
                   ),
                   const SizedBox(height: 15),
-                  CustomButtonAuth(
+                  CustomButton(
                     text: 'login'.tr, 
                     onPressed: () {
                       controller.login();

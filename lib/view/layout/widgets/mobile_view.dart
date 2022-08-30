@@ -33,6 +33,12 @@ class MobileView extends StatelessWidget {
               ],
             ),
             actions: [
+              InkWell(
+                onTap: (){
+                  controller.switchTheme();
+                },
+                child: Icon(EvaIcons.moon, color:Theme.of(context).primaryColorLight)
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: InkWell(

@@ -3,7 +3,8 @@ import 'package:estore_admin_panel/utils/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class UserInfoDetail extends StatelessWidget {
-  const UserInfoDetail({Key? key, required this.info}) : super(key: key);
+  final Color? color;
+  const UserInfoDetail({Key? key, required this.info, this.color}) : super(key: key);
 
   final UserModel info;
 
@@ -12,6 +13,7 @@ class UserInfoDetail extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(top: appPadding),
       padding: const EdgeInsets.all(appPadding / 2),
+      color: color,
       child: Row(
         children: [
           ClipRRect(

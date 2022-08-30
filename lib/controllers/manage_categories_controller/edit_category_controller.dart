@@ -1,4 +1,4 @@
-import 'package:estore_admin_panel/controllers/category_controller.dart';
+import 'package:estore_admin_panel/controllers/manage_categories_controller/category_controller.dart';
 import 'package:estore_admin_panel/data/repository/category_repo.dart';
 import 'package:estore_admin_panel/models/categories_model.dart';
 import 'package:estore_admin_panel/utils/constants/app_constants.dart';
@@ -41,11 +41,11 @@ class EditCategoryController extends GetxController{
           Get.find<CategoryController>().getCategoryList();
           Get.find<CategoryController>().manageCategoryToggleScreen(0);
         }else{
-          Get.snackbar('Faild', 'Phone number or email is already exist',
+          Get.snackbar('Faild', response['status'],
             backgroundColor: Colors.red.withOpacity(0.5), colorText: Colors.white);
         }
       }else{
-        Get.snackbar('Faild', 'Phone number or email is already exist',
+        Get.snackbar('Faild', 'FROM FAILD§§§§',
           backgroundColor: Colors.red.withOpacity(0.5), colorText: Colors.white);
       }
       update();
@@ -89,10 +89,14 @@ class EditCategoryController extends GetxController{
 
   @override
   void onInit() {
-    nameController    = TextEditingController();
-    nameArController  = TextEditingController();
-    nameFrController  = TextEditingController();
-    imageController   = TextEditingController();
+    nameController         = TextEditingController();
+    nameArController       = TextEditingController();
+    nameFrController       = TextEditingController();
+    imageController        = TextEditingController();
+    nameController.text    = Get.find<CategoryController>().category!.name!;
+    nameArController.text  = Get.find<CategoryController>().category!.nameAr!;
+    nameFrController.text  = Get.find<CategoryController>().category!.nameFr!;
+    imageController.text   = Get.find<CategoryController>().category!.image!;
     super.onInit();
   }
 

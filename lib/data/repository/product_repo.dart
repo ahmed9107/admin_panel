@@ -1,12 +1,12 @@
 import 'package:estore_admin_panel/data/api/api_client.dart';
 
-class CategoryRepo{
+class ProductRepo{
   final ApiClient apiClient;
 
-  CategoryRepo({required this.apiClient});
+  ProductRepo({required this.apiClient});
 
   /* getData() async {
-    var response = await apiClient.getData(AppConstants.CATEGORIES_DATA_URI);
+    var response = await apiClient.getData(AppConstants.PRODUCT_DATA_URI);
     return response.fold((l) => l, (r) => r);
   } */
 

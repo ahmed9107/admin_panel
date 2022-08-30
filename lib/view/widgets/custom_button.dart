@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 
-class CustomButtonAuth extends StatelessWidget {
+class CustomButton extends StatelessWidget {
   final String text;
   final void Function()? onPressed;
   final double width;
-  const CustomButtonAuth({
+  const CustomButton({
     Key? key,
     required this.text, this.onPressed, this.width = double.maxFinite})
       : super(key: key);
@@ -21,11 +21,11 @@ class CustomButtonAuth extends StatelessWidget {
           right:15
         ),
         width: width,
-        height: 50*1.1,
+        height: 50,
         //padding: EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
           color: Theme.of(context).primaryColor,
-          borderRadius: BorderRadius.circular(10)
+          borderRadius: BorderRadius.circular(5)
         ),
         child: Center(
           child: Text(
@@ -33,7 +33,7 @@ class CustomButtonAuth extends StatelessWidget {
             style: TextStyle(
               color: Theme.of(context).scaffoldBackgroundColor,
               fontWeight: FontWeight.bold,
-              fontSize: 18.0),),
+              fontSize: 16.0),),
         ),
       ),
     );

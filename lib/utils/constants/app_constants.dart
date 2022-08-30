@@ -12,6 +12,10 @@ class AppConstants {
   static const String EDIT_CATEGORY_URI           = '/categories_manager/edit_category.php';
   static const String DELETE_CATEGORY_URI         = '/categories_manager/delete_category.php';
   static const String ADD_CATEGORY_URI            = '/categories_manager/add_category.php';
+  static const String PRODUCT_DATA_URI            = '/products/get_products.php';
+  static const String EDIT_PRODUCT_URI            = '/products/edit_product.php';
+  static const String DELETE_PRODUCT_URI          = '/products/delete_product.php';
+  static const String ADD_PRODUCT_URI             = '/products/add_product.php';
 }
 
 // https://didishoop.com/public/estore_api/auth/admin_auth/admin_auth.php

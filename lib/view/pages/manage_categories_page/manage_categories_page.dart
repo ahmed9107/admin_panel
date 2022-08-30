@@ -1,4 +1,4 @@
-import 'package:estore_admin_panel/controllers/category_controller.dart';
+import 'package:estore_admin_panel/controllers/manage_categories_controller/category_controller.dart';
 import 'package:estore_admin_panel/view/pages/manage_categories_page/add_screen/add_screen.dart';
 import 'package:estore_admin_panel/view/pages/manage_categories_page/edit_screen/edit_screen.dart';
 import 'package:estore_admin_panel/view/pages/manage_categories_page/main_screen/main_screen.dart';

@@ -1,4 +1,4 @@
-import 'package:estore_admin_panel/controllers/customer_controller.dart';
+import 'package:estore_admin_panel/controllers/manage_customers_controllers/customer_controller.dart';
 import 'package:estore_admin_panel/view/pages/manage_customers_page/add_screen/add_customer_screen.dart';
 import 'package:estore_admin_panel/view/pages/manage_customers_page/edit_screen/edit_screen.dart';
 import 'package:estore_admin_panel/view/pages/manage_customers_page/main_screen/main_screen.dart';

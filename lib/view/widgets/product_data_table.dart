@@ -1,16 +1,17 @@
-import 'package:estore_admin_panel/controllers/manage_categories_controller/category_controller.dart';
+import 'package:estore_admin_panel/controllers/manage_products_controller/product_controller.dart';
+import 'package:estore_admin_panel/utils/constants/app_constants.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CategoriesDatatable extends StatelessWidget {
-  const CategoriesDatatable({Key? key}) : super(key: key);
+class ProductsDatatable extends StatelessWidget {
+  const ProductsDatatable({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    return GetBuilder<CategoryController>(
+    return GetBuilder<ProductController>(
       builder: (controller) {
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -34,25 +35,76 @@ class CategoriesDatatable extends StatelessWidget {
                   label: Text('ID'),
                 ),
                 DataColumn(
-                  label: Text('Category Name'),
+                  label: Text('Name'),
+                ),
+                DataColumn(
+                  label: Text('Price'),
+                ),
+                DataColumn(
+                  label: Text('Created At'),
                 ),
                 DataColumn(
                   label: Text('Image'),
+                ),
+                DataColumn(
+                  label: Text('Count'),
+                ),
+                DataColumn(
+                  label: Text('Discount'),
+                ),
+                DataColumn(
+                  label: Text('Status'),
                 ),
                 DataColumn(
                   label: Text('Action'),
                 ),
               ],
               rows: List<DataRow>.generate(
-                controller.categoryList.length,
+                controller.productList.length,
                 (index) => DataRow(
                   cells: <DataCell>[
                     DataCell(
-                      Text(controller.categoryList[index].id!)),
+                      Text(controller.productList[index].id!)),
                     DataCell(
-                      Text(controller.categoryList[index].name!)),
+                      Text(controller.productList[index].name!)),
                     DataCell(
-                      Text(controller.categoryList[index].image!)),
+                      Text(controller.productList[index].price!)),
+                    DataCell(
+                      Text(controller.productList[index].addDate!)),
+                    DataCell(
+                      Container(
+                        height: 70,
+                        width: 70,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage('${AppConstants.BASE_URL}/${controller.productList[index].image!}'))
+                        ),
+                      )),
+                    DataCell(
+                      Text(controller.productList[index].count!)),
+                    DataCell(
+                      Text(int.parse(controller.productList[index].discount!) > 0 
+                        ? '${controller.productList[index].discount!}%'
+                        : '--')),
+                    DataCell(
+                      int.parse(controller.productList[index].active!) > 0
+                        ? Container(
+                            padding: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF4ABB34),
+                              borderRadius: BorderRadius.circular(5)
+                            ),
+                            child: Text('ON', style: GoogleFonts.roboto(color: Colors.white)))
+                        : Container(
+                            padding: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFB40000),
+                              borderRadius: BorderRadius.circular(5)
+                            ),
+                            child: Text('OFF', style: GoogleFonts.roboto(color: Colors.white)))
+                    ),
                     DataCell(
                       Row(
                         children: [
@@ -62,11 +114,11 @@ class CategoriesDatatable extends StatelessWidget {
                                 title: 'Warning!',
                                 titleStyle: GoogleFonts.roboto(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 18.0
+                                  fontSize: 16.0
                                 ),
                                 middleText: "Are sure you want to delete this customer?",
                                 middleTextStyle: GoogleFonts.roboto(
-                                  fontSize: 16.0
+                                  fontSize: 13.0
                                 ),
                                 radius: 10,
                                 actions: [
@@ -77,7 +129,7 @@ class CategoriesDatatable extends StatelessWidget {
                                     child: const Text('Cancel')),
                                   InkWell(
                                     onTap: (){
-                                      controller.deleteCategory(controller.categoryList[index]);
+                                      controller.deleteProduct(controller.productList[index]);
                                       Get.back();
                                     },
                                     child: const Text('Yes')),
@@ -95,12 +147,12 @@ class CategoriesDatatable extends StatelessWidget {
                           const SizedBox(width: 10),
                           GestureDetector(
                             onTap: () {
-                              controller.manageCategoryToggleScreen(1, categoryData: controller.categoryList[index]);
+                              controller.manageProductToggleScreen(1, product: controller.productList[index]);
                             },
                             child: Container(
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                color: const Color(0xFF3161FC),
+                                color: const Color(0xFF006492),
                                 borderRadius: BorderRadius.circular(5)
                               ),
                               child: const Icon(EvaIcons.editOutline, color: Colors.white)),
