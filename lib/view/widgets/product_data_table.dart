@@ -75,11 +75,14 @@ class ProductsDatatable extends StatelessWidget {
                       Container(
                         height: 70,
                         width: 70,
+                        margin: const EdgeInsets.symmetric(vertical: 5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             fit: BoxFit.cover,
-                            image: NetworkImage('${AppConstants.BASE_URL}/${controller.productList[index].image!}'))
+                            image: AssetImage('assets/images/photo1.jpg')
+                            //image: NetworkImage('${AppConstants.BASE_URL}/${controller.productList[index].image!}')
+                          )
                         ),
                       )),
                     DataCell(

@@ -11,6 +11,7 @@ class AddCategoryController extends GetxController{
   final CategoryRepo categoryRepo;
   AddCategoryController({required this.categoryRepo});
   
+  GlobalKey<FormState> formstate = GlobalKey<FormState>();
   late TextEditingController nameController;
   late TextEditingController nameArController;
   late TextEditingController nameFrController;
@@ -19,7 +20,7 @@ class AddCategoryController extends GetxController{
   StatusRequest statusRequest = StatusRequest.none;
 
   addCategory() async {
-    if(fieldValidat()){
+    if (formstate.currentState!.validate()) {
       statusRequest = StatusRequest.loading;
       update();
       Map<String, dynamic> data = {
@@ -43,42 +44,7 @@ class AddCategoryController extends GetxController{
           backgroundColor: Colors.red.withOpacity(0.5), colorText: Colors.white);
       }
       update();
-    } else {
-      Get.snackbar('Faild', errorMsg,
-          backgroundColor: Colors.red.withOpacity(0.5), colorText: Colors.white);
-    }
-  }
-
-  String errorMsg = '';
-
-  bool fieldValidat(){
-    if (nameController.text.trim().isEmpty ||
-      nameController.text.trim().length < 3 ||
-      nameController.text.trim().length > 20){
-      errorMsg = 'Enter a valid name';
-      update();
-      return false;
-    }
-    if (nameArController.text.trim().isEmpty ||
-      nameArController.text.trim().length < 3 ||
-      nameArController.text.trim().length > 20){
-      errorMsg = 'Enter a valid name';
-      update();
-      return false;
-    }
-    if (nameFrController.text.trim().isEmpty ||
-      nameFrController.text.trim().length < 3 ||
-      nameFrController.text.trim().length > 20){
-      errorMsg = 'Enter a valid name';
-      update();
-      return false;
-    }
-    if (imageController.text.trim().isEmpty){
-      errorMsg = 'Enter a valid Phone number';
-      update();
-      return false;
-    }
-    return true;
+    } else {}
   }
 
   @override

@@ -46,14 +46,17 @@ class TopNavBar extends StatelessWidget  with PreferredSizeWidget{
               padding: EdgeInsets.symmetric(horizontal: 8.0),
               child: SmallText(text: 'Ahmed Azami'),
             ),
-            Container(
-              margin: const EdgeInsets.all(10),
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColorLight,
-                borderRadius: BorderRadius.circular(40/2)
-              )
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(40),
+                child: Image.asset(
+                  'assets/images/photo1.jpg',
+                  height: 38,
+                  width: 38,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           ],
         ),

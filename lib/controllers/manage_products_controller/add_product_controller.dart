@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:estore_admin_panel/controllers/manage_products_controller/product_controller.dart';
 import 'package:estore_admin_panel/data/repository/product_repo.dart';
 import 'package:estore_admin_panel/utils/constants/app_constants.dart';
@@ -5,16 +7,17 @@ import 'package:estore_admin_panel/utils/constants/status-request.dart';
 import 'package:estore_admin_panel/utils/functions/handling_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddProductController extends GetxController{
 
   final ProductRepo productRepo;
   AddProductController({required this.productRepo});
-  
+
+  GlobalKey<FormState> formstate = GlobalKey<FormState>();
   late TextEditingController nameController;
   late TextEditingController nameArController;
   late TextEditingController nameFrController;
-  late TextEditingController imageController;
   late TextEditingController descriptionController;
   late TextEditingController descriptionArController;
   late TextEditingController descriptionFrController;
@@ -25,20 +28,20 @@ class AddProductController extends GetxController{
   StatusRequest statusRequest = StatusRequest.none;
 
   addProduct() async {
-    if(fieldValidat()){
+    if (formstate.currentState!.validate()){
       statusRequest = StatusRequest.loading;
       update();
       Map<String, dynamic> data = {
         'name'      : nameController.text.trim(),
         'name_ar'   : nameArController.text.trim(),
         'name_fr'   : nameFrController.text.trim(),
-        'image'     : imageController.text.trim(),
         'desc'      : descriptionController.text.trim(),
         'desc_ar'   : descriptionArController.text.trim(),
         'desc_fr'   : descriptionFrController.text.trim(),
         'price'     : priceController.text.trim(),
         'count'     : countController.text.trim(),
         'discount'  : discountController.text.trim(),
+        'image'     : '',
       };
       var response = await productRepo.postData(AppConstants.ADD_PRODUCT_URI, data);
       statusRequest = handlingData(response);
@@ -55,39 +58,14 @@ class AddProductController extends GetxController{
           backgroundColor: Colors.red.withOpacity(0.5), colorText: Colors.white);
       }
       update();
-    } else {
-      Get.snackbar('Faild', errorMsg,
-          backgroundColor: Colors.red.withOpacity(0.5), colorText: Colors.white);
-    }
+    } else {}
   }
 
-  String errorMsg = '';
+  File? file;
 
-  bool fieldValidat(){
-    if (nameController.text.trim().isEmpty ||
-      nameController.text.trim().length < 3){
-      errorMsg = 'Enter a valid name';
-      update();
-      return false;
-    }
-    if (nameArController.text.trim().isEmpty ||
-      nameArController.text.trim().length < 3){
-      errorMsg = 'Enter a valid name';
-      update();
-      return false;
-    }
-    if (nameFrController.text.trim().isEmpty ||
-      nameFrController.text.trim().length < 3){
-      errorMsg = 'Enter a valid name';
-      update();
-      return false;
-    }
-    if (imageController.text.trim().isEmpty){
-      errorMsg = 'Enter a valid Phone number';
-      update();
-      return false;
-    }
-    return true;
+  pickImage(ImageSource source) async {
+    XFile? xfile = await ImagePicker().pickImage(source: source);
+    file = File(xfile!.path);
   }
 
   @override
@@ -95,7 +73,6 @@ class AddProductController extends GetxController{
     nameController          = TextEditingController();
     nameArController        = TextEditingController();
     nameFrController        = TextEditingController();
-    imageController         = TextEditingController();
     descriptionController   = TextEditingController();
     descriptionArController = TextEditingController();
     descriptionFrController = TextEditingController();
@@ -110,7 +87,6 @@ class AddProductController extends GetxController{
     nameController.dispose();
     nameArController.dispose();
     nameFrController.dispose();
-    imageController.dispose();
     descriptionController.dispose();
     descriptionArController.dispose();
     descriptionFrController.dispose();

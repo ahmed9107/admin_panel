@@ -11,6 +11,7 @@ class AddCustomerController extends GetxController{
   final CustomerRepo customerRepo;
   AddCustomerController({required this.customerRepo});
   
+  GlobalKey<FormState> formstate = GlobalKey<FormState>();
   late TextEditingController nameController;
   late TextEditingController passwordController;
   late TextEditingController emailController;
@@ -19,7 +20,7 @@ class AddCustomerController extends GetxController{
   StatusRequest statusRequest = StatusRequest.none;
 
   addCustomer() async {
-    if(fieldValidat()){
+    if (formstate.currentState!.validate()){
       statusRequest = StatusRequest.loading;
       update();
       Map<String, dynamic> data = {
@@ -43,46 +44,9 @@ class AddCustomerController extends GetxController{
           backgroundColor: Colors.red.withOpacity(0.5), colorText: Colors.white);
       }
       update();
-    } else {
-      Get.snackbar('Faild', errorMsg,
-          backgroundColor: Colors.red.withOpacity(0.5), colorText: Colors.white);
-    }
+    } else {}
   }
-
-  String errorMsg = '';
-
-  bool fieldValidat(){
-    if (!GetUtils.isEmail(emailController.text.trim()) || emailController.text.trim().isEmpty){
-      errorMsg = 'Enter a valid email';
-      update();
-      return false;
-    }
-    if (!GetUtils.isUsername(nameController.text.trim()) ||
-      nameController.text.trim().isEmpty ||
-      nameController.text.trim().length < 3 ||
-      nameController.text.trim().length > 20){
-      errorMsg = 'Enter a valid name';
-      update();
-      return false;
-    }
-    if (!GetUtils.isPhoneNumber(phoneController.text.trim()) ||
-      phoneController.text.trim().isEmpty ||
-      phoneController.text.trim().length < 6 ||
-      phoneController.text.trim().length > 20){
-      errorMsg = 'Enter a valid Phone number';
-      update();
-      return false;
-    }
-    if (passwordController.text.trim().isEmpty ||
-      passwordController.text.trim().length < 8 ||
-      passwordController.text.trim().length > 30){
-      errorMsg = 'Enter a valid password';
-      update();
-      return false;
-    }
-    return true;
-  }
-
+  
   @override
   void onInit() {
     nameController      = TextEditingController();

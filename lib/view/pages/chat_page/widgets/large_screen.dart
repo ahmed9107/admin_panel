@@ -1,6 +1,6 @@
 import 'package:estore_admin_panel/data/static.dart';
 import 'package:estore_admin_panel/view/widgets/chat_container.dart';
-import 'package:estore_admin_panel/view/widgets/custom_input_field.dart';
+import 'package:estore_admin_panel/view/widgets/chat_message_field.dart';
 import 'package:estore_admin_panel/view/widgets/user_info_detail.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +54,7 @@ class LargeScreen extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: CustomInputField(
+                      child: ChatMessageField(
                         type: TextInputType.text,
                         controller: msgController,
                         bgColor: Theme.of(context).backgroundColor,
