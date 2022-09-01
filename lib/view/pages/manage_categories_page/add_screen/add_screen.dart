@@ -7,6 +7,8 @@ import 'package:estore_admin_panel/view/widgets/custom_input_field.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddScreen extends StatelessWidget {
   const AddScreen({Key? key}) : super(key: key);
@@ -64,14 +66,77 @@ class AddScreen extends StatelessWidget {
                     return inputValidator(val!, 4, 20, null);
                   }
                 ),
-                /* CustomInputField(
-                  controller: controller.imageController,
-                  type: TextInputType.text,
-                  hint: 'Image',
-                  bgColor: Theme.of(context).backgroundColor,
-                  title: 'Password',
-
-                ), */
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: InkWell(
+                    onTap: (){
+                      Get.defaultDialog(
+                        title: 'Choose image',
+                        titleStyle: GoogleFonts.roboto(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0
+                        ),
+                        content: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: ()async{
+                                await controller.pickImage(ImageSource.gallery);
+                              },
+                              child: Container(
+                                width: 100,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: const Color(0xFF9B9B9B)),
+                                  borderRadius: BorderRadius.circular(10)
+                                ),
+                                child: const Center(
+                                  child: Icon(
+                                    EvaIcons.imageOutline, color:Color(0xFF9B9B9B)
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            InkWell(
+                              onTap: ()async{
+                                await controller.pickImage(ImageSource.camera);
+                              },
+                              child: Container(
+                                width: 100,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: const Color(0xFF9B9B9B)),
+                                  borderRadius: BorderRadius.circular(10)
+                                ),
+                                child: const Center(
+                                  child: Icon(
+                                    EvaIcons.cameraOutline, color:Color(0xFF9B9B9B)
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        radius: 5,
+                      );
+                    },
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: const Color(0xFF9B9B9B)),
+                        borderRadius: BorderRadius.circular(10)
+                      ),
+                      child: const Center(
+                        child: Icon(
+                          EvaIcons.cameraOutline, color:Color(0xFF9B9B9B)
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
                 CustomButton(
                   onPressed: (){
                     controller.addCategory();

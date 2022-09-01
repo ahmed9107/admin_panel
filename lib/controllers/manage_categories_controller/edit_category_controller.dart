@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:estore_admin_panel/controllers/manage_categories_controller/category_controller.dart';
 import 'package:estore_admin_panel/data/repository/category_repo.dart';
 import 'package:estore_admin_panel/models/categories_model.dart';
@@ -6,6 +8,7 @@ import 'package:estore_admin_panel/utils/constants/status-request.dart';
 import 'package:estore_admin_panel/utils/functions/handling_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class EditCategoryController extends GetxController{
 
@@ -16,7 +19,6 @@ class EditCategoryController extends GetxController{
   late TextEditingController nameController;
   late TextEditingController nameArController;
   late TextEditingController nameFrController;
-  late TextEditingController imageController;
 
   final List _data = [];
   List get data => _data;
@@ -33,7 +35,7 @@ class EditCategoryController extends GetxController{
         name:   nameController.text.trim(),
         nameAr: nameArController.text.trim(),
         nameFr: nameFrController.text.trim(),
-        image:  imageController.text.trim(),
+        image:  '',
       );
       var response = await categoryRepo.postData(AppConstants.EDIT_CATEGORY_URI, model.toJson());
       statusRequest = handlingData(response);
@@ -53,16 +55,21 @@ class EditCategoryController extends GetxController{
     } else {}
   }
 
+  File? file;
+
+  pickImage(ImageSource source) async {
+    XFile? xfile = await ImagePicker().pickImage(source: source);
+    file = File(xfile!.path);
+  }
+
   @override
   void onInit() {
     nameController         = TextEditingController();
     nameArController       = TextEditingController();
     nameFrController       = TextEditingController();
-    imageController        = TextEditingController();
     nameController.text    = Get.find<CategoryController>().category!.name!;
     nameArController.text  = Get.find<CategoryController>().category!.nameAr!;
     nameFrController.text  = Get.find<CategoryController>().category!.nameFr!;
-    imageController.text   = Get.find<CategoryController>().category!.image!;
     super.onInit();
   }
 
@@ -71,7 +78,6 @@ class EditCategoryController extends GetxController{
     nameController.dispose();
     nameArController.dispose();
     nameFrController.dispose();
-    imageController.dispose();
     super.dispose();
   }
 }

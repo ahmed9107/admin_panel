@@ -33,9 +33,9 @@ class AddScreen extends StatelessWidget {
       ),
       body: GetBuilder<AddProductController>(
         builder: (controller) {
-          return Form(
-            key: controller.formstate,
-            child: SingleChildScrollView(
+          return SingleChildScrollView(
+            child: Form(
+              key: controller.formstate,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:estore_admin_panel/controllers/manage_categories_controller/category_controller.dart';
 import 'package:estore_admin_panel/data/repository/category_repo.dart';
 import 'package:estore_admin_panel/utils/constants/app_constants.dart';
@@ -5,6 +7,7 @@ import 'package:estore_admin_panel/utils/constants/status-request.dart';
 import 'package:estore_admin_panel/utils/functions/handling_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddCategoryController extends GetxController{
 
@@ -15,7 +18,6 @@ class AddCategoryController extends GetxController{
   late TextEditingController nameController;
   late TextEditingController nameArController;
   late TextEditingController nameFrController;
-  late TextEditingController imageController;
 
   StatusRequest statusRequest = StatusRequest.none;
 
@@ -27,7 +29,7 @@ class AddCategoryController extends GetxController{
         'name'      : nameController.text.trim(),
         'name_ar'   : nameArController.text.trim(),
         'name_fr'   : nameFrController.text.trim(),
-        'image'     : imageController.text.trim(),
+        'image'     : '',
       };
       var response = await categoryRepo.postData(AppConstants.ADD_CATEGORY_URI, data);
       statusRequest = handlingData(response);
@@ -47,12 +49,18 @@ class AddCategoryController extends GetxController{
     } else {}
   }
 
+  File? file;
+
+  pickImage(ImageSource source) async {
+    XFile? xfile = await ImagePicker().pickImage(source: source);
+    file = File(xfile!.path);
+  }
+
   @override
   void onInit() {
     nameController    = TextEditingController();
     nameArController  = TextEditingController();
     nameFrController  = TextEditingController();
-    imageController   = TextEditingController();
     super.onInit();
   }
 
@@ -61,7 +69,6 @@ class AddCategoryController extends GetxController{
     nameController.dispose();
     nameArController.dispose();
     nameFrController.dispose();
-    imageController.dispose();
     super.dispose();
   }
 }
