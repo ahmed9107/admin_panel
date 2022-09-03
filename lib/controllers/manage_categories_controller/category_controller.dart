@@ -57,8 +57,8 @@ class CategoryController extends GetxController{
   }
   
   @override
-  void onInit() {
-    getCategoryList();
+  Future<void> onInit() async {
+    await getCategoryList();
     super.onInit();
   }
 }

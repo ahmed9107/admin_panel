@@ -57,8 +57,8 @@ class CustomerController extends GetxController{
   }
   
   @override
-  void onInit() {
-    getCustomersList();
+  Future<void> onInit() async {
+    await getCustomersList();
     super.onInit();
   }
 }

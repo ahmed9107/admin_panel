@@ -33,6 +33,10 @@ class EditProductController extends GetxController{
   late ProductData model;
 
   editProduct(ProductData product) async {
+    if(file == null){
+      return Get.snackbar('Faild', 'You have to choose product image!',
+        backgroundColor: Colors.red.withOpacity(0.5), colorText: Colors.white);
+    }
     if (formstate.currentState!.validate()){
       statusRequest = StatusRequest.loading;
       update();
@@ -47,9 +51,8 @@ class EditProductController extends GetxController{
         price         : descriptionFrController.text.trim(),
         count         : descriptionFrController.text.trim(),
         discount      : descriptionFrController.text.trim(),
-        image         : '',
       );
-      var response = await productRepo.postData(AppConstants.EDIT_PRODUCT_URI, model.toJson());
+      var response = await productRepo.postDataWithFile(AppConstants.EDIT_PRODUCT_URI, model.toJson(), file!);
       statusRequest = handlingData(response);
       if(statusRequest == StatusRequest.success){
         if(response['status'] == 'success'){

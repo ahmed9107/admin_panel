@@ -32,56 +32,58 @@ class AddScreen extends StatelessWidget {
         builder: (controller) {
           return Form(
             key: controller.formstate,
-            child: Column(
-              children: [
-                CustomInputField(
-                  controller: controller.emailController,
-                  type: TextInputType.emailAddress,
-                  hint: 'Enter customer email',
-                  bgColor: Theme.of(context).backgroundColor,
-                  title: 'Email',
-                  validate: (val){
-                    return inputValidator(val!, 5, 100, "email");
-                  }
-                ),
-                CustomInputField(
-                  controller: controller.nameController,
-                  type: TextInputType.text,
-                  hint: 'Enter customer name',
-                  bgColor: Theme.of(context).backgroundColor,
-                  title: 'Name',
-                  validate: (val){
-                    return inputValidator(val!, 3, 20, "username");
-                  }
-                ),
-                CustomInputField(
-                  controller: controller.phoneController,
-                  type: TextInputType.number,
-                  hint: 'Enter phone number',
-                  bgColor: Theme.of(context).backgroundColor,
-                  title: 'Phone',
-                  validate: (val){
-                    return inputValidator(val!, 5, 100, "phone");
-                  }
-                ),
-                CustomInputField(
-                  controller: controller.passwordController,
-                  type: TextInputType.text,
-                  hint: 'Enter password',
-                  bgColor: Theme.of(context).backgroundColor,
-                  title: 'Password',
-                  validate: (val){
-                    return inputValidator(val!, 3, 30, "password");
-                  }
-                ),
-                const SizedBox(height: 20),
-                CustomButton(
-                  onPressed: (){
-                    controller.addCustomer();
-                  },
-                  text: 'Submit',
-                ),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  CustomInputField(
+                    controller: controller.emailController,
+                    type: TextInputType.emailAddress,
+                    hint: 'Enter customer email',
+                    bgColor: Theme.of(context).backgroundColor,
+                    title: 'Email',
+                    validate: (val){
+                      return inputValidator(val!, 5, 100, "email");
+                    }
+                  ),
+                  CustomInputField(
+                    controller: controller.nameController,
+                    type: TextInputType.text,
+                    hint: 'Enter customer name',
+                    bgColor: Theme.of(context).backgroundColor,
+                    title: 'Name',
+                    validate: (val){
+                      return inputValidator(val!, 3, 20, "username");
+                    }
+                  ),
+                  CustomInputField(
+                    controller: controller.phoneController,
+                    type: TextInputType.number,
+                    hint: 'Enter phone number',
+                    bgColor: Theme.of(context).backgroundColor,
+                    title: 'Phone',
+                    validate: (val){
+                      return inputValidator(val!, 5, 100, "phone");
+                    }
+                  ),
+                  CustomInputField(
+                    controller: controller.passwordController,
+                    type: TextInputType.text,
+                    hint: 'Enter password',
+                    bgColor: Theme.of(context).backgroundColor,
+                    title: 'Password',
+                    validate: (val){
+                      return inputValidator(val!, 3, 30, "password");
+                    }
+                  ),
+                  const SizedBox(height: 20),
+                  CustomButton(
+                    onPressed: (){
+                      controller.addCustomer();
+                    },
+                    text: 'Submit',
+                  ),
+                ],
+              ),
             ),
           );
         }

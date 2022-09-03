@@ -22,6 +22,10 @@ class AddCategoryController extends GetxController{
   StatusRequest statusRequest = StatusRequest.none;
 
   addCategory() async {
+    if(file == null){
+      return Get.snackbar('Faild', 'You have to choose category image!',
+        backgroundColor: Colors.red.withOpacity(0.5), colorText: Colors.white);
+    }
     if (formstate.currentState!.validate()) {
       statusRequest = StatusRequest.loading;
       update();
@@ -29,9 +33,8 @@ class AddCategoryController extends GetxController{
         'name'      : nameController.text.trim(),
         'name_ar'   : nameArController.text.trim(),
         'name_fr'   : nameFrController.text.trim(),
-        'image'     : '',
       };
-      var response = await categoryRepo.postData(AppConstants.ADD_CATEGORY_URI, data);
+      var response = await categoryRepo.postDataWithFile(AppConstants.ADD_CATEGORY_URI, data, file!);
       statusRequest = handlingData(response);
       if(statusRequest == StatusRequest.success){
         if(response['status'] == 'success'){
@@ -54,6 +57,12 @@ class AddCategoryController extends GetxController{
   pickImage(ImageSource source) async {
     XFile? xfile = await ImagePicker().pickImage(source: source);
     file = File(xfile!.path);
+    update();
+  }
+
+  void deleteImage() {
+    file = null;
+    update();
   }
 
   @override

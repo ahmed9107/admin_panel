@@ -57,8 +57,8 @@ class ProductController extends GetxController{
   }
   
   @override
-  void onInit() {
-    getProductList();
+  Future<void> onInit() async {
+    await getProductList();
     super.onInit();
   }
 }

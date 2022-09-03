@@ -28,6 +28,10 @@ class AddProductController extends GetxController{
   StatusRequest statusRequest = StatusRequest.none;
 
   addProduct() async {
+    if(file == null){
+      return Get.snackbar('Faild', 'You have to choose product image!',
+        backgroundColor: Colors.red.withOpacity(0.5), colorText: Colors.white);
+    }
     if (formstate.currentState!.validate()){
       statusRequest = StatusRequest.loading;
       update();
@@ -41,9 +45,8 @@ class AddProductController extends GetxController{
         'price'     : priceController.text.trim(),
         'count'     : countController.text.trim(),
         'discount'  : discountController.text.trim(),
-        'image'     : '',
       };
-      var response = await productRepo.postData(AppConstants.ADD_PRODUCT_URI, data);
+      var response = await productRepo.postDataWithFile(AppConstants.ADD_PRODUCT_URI, data, file!);
       statusRequest = handlingData(response);
       if(statusRequest == StatusRequest.success){
         if(response['status'] == 'success'){
@@ -66,6 +69,12 @@ class AddProductController extends GetxController{
   pickImage(ImageSource source) async {
     XFile? xfile = await ImagePicker().pickImage(source: source);
     file = File(xfile!.path);
+    update();
+  }
+
+  void deleteImage() {
+    file = null;
+    update();
   }
 
   @override

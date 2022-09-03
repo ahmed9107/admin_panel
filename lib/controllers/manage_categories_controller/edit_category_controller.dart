@@ -27,6 +27,10 @@ class EditCategoryController extends GetxController{
   late CategoriesData model;
 
   editCategory(CategoriesData category) async {
+    if(file == null){
+      return Get.snackbar('Faild', 'You have to choose category image!',
+        backgroundColor: Colors.red.withOpacity(0.5), colorText: Colors.white);
+    }
     if (formstate.currentState!.validate()) {
       statusRequest = StatusRequest.loading;
       update();
@@ -35,9 +39,8 @@ class EditCategoryController extends GetxController{
         name:   nameController.text.trim(),
         nameAr: nameArController.text.trim(),
         nameFr: nameFrController.text.trim(),
-        image:  '',
       );
-      var response = await categoryRepo.postData(AppConstants.EDIT_CATEGORY_URI, model.toJson());
+      var response = await categoryRepo.postDataWithFile(AppConstants.EDIT_CATEGORY_URI, model.toJson(), file!);
       statusRequest = handlingData(response);
       if(statusRequest == StatusRequest.success){
         if(response['status'] == 'success'){

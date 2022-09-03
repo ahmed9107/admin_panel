@@ -1,4 +1,5 @@
 import 'package:estore_admin_panel/controllers/manage_categories_controller/category_controller.dart';
+import 'package:estore_admin_panel/utils/constants/app_constants.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -52,7 +53,19 @@ class CategoriesDatatable extends StatelessWidget {
                     DataCell(
                       Text(controller.categoryList[index].name!)),
                     DataCell(
-                      Text(controller.categoryList[index].image!)),
+                      Container(
+                        height: 70,
+                        width: 70,
+                        margin: const EdgeInsets.symmetric(vertical: 5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            //image: AssetImage('assets/images/photo1.jpg')
+                            image: NetworkImage('${AppConstants.BASE_URL}/uploads/${controller.categoryList[index].image!}')
+                          )
+                        ),
+                      )),
                     DataCell(
                       Row(
                         children: [

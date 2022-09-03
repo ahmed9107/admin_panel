@@ -126,78 +126,106 @@ class AddScreen extends StatelessWidget {
                   const SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: InkWell(
-                      onTap: (){
-                        Get.defaultDialog(
-                          title: 'Choose image',
-                          titleStyle: GoogleFonts.roboto(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.0
-                          ),
-                          content: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              InkWell(
-                                onTap: ()async{
-                                  await controller.pickImage(ImageSource.gallery);
-                                },
-                                child: Container(
+                    child: Row(
+                      children: [
+                        controller.file != null 
+                          ? Stack(
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.only(right: 10),
                                   width: 100,
                                   height: 100,
                                   decoration: BoxDecoration(
                                     border: Border.all(color: const Color(0xFF9B9B9B)),
                                     borderRadius: BorderRadius.circular(10)
                                   ),
-                                  child: const Center(
-                                    child: Icon(
-                                      EvaIcons.imageOutline, color:Color(0xFF9B9B9B)
+                                  child: Image.file(controller.file!),
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    controller.deleteImage();
+                                  },
+                                  icon: const Icon(Icons.cancel, color: Color(0xFF636161)),
+                                ),
+                              ],
+                            )
+                          : Container(),
+                        InkWell(
+                          onTap: (){
+                            Get.defaultDialog(
+                              title: 'Choose image',
+                              titleStyle: GoogleFonts.roboto(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.0
+                              ),
+                              content: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  InkWell(
+                                    onTap: ()async{
+                                      await controller.pickImage(ImageSource.gallery);
+                                      Get.back();
+                                    },
+                                    child: Container(
+                                      width: 100,
+                                      height: 100,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: const Color(0xFF9B9B9B)),
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
+                                      child: const Center(
+                                        child: Icon(
+                                          EvaIcons.imageOutline, color:Color(0xFF9B9B9B)
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              InkWell(
-                                onTap: ()async{
-                                  await controller.pickImage(ImageSource.camera);
-                                },
-                                child: Container(
-                                  width: 100,
-                                  height: 100,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: const Color(0xFF9B9B9B)),
-                                    borderRadius: BorderRadius.circular(10)
-                                  ),
-                                  child: const Center(
-                                    child: Icon(
-                                      EvaIcons.cameraOutline, color:Color(0xFF9B9B9B)
+                                  const SizedBox(width: 10),
+                                  InkWell(
+                                    onTap: ()async{
+                                      await controller.pickImage(ImageSource.camera);
+                                      Get.back();
+                                    },
+                                    child: Container(
+                                      width: 100,
+                                      height: 100,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: const Color(0xFF9B9B9B)),
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
+                                      child: const Center(
+                                        child: Icon(
+                                          EvaIcons.cameraOutline, color:Color(0xFF9B9B9B)
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
+                                ],
                               ),
-                            ],
+                              radius: 5,
+                            );
+                          },
+                          child: Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: const Color(0xFF9B9B9B)),
+                              borderRadius: BorderRadius.circular(10)
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                EvaIcons.cameraOutline, color:Color(0xFF9B9B9B)
+                              ),
+                            ),
                           ),
-                          radius: 5,
-                        );
-                      },
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: const Color(0xFF9B9B9B)),
-                          borderRadius: BorderRadius.circular(10)
                         ),
-                        child: const Center(
-                          child: Icon(
-                            EvaIcons.cameraOutline, color:Color(0xFF9B9B9B)
-                          ),
-                        ),
-                      ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 20),
                   CustomButton(
                     onPressed: (){
-                      controller.addProduct;
+                      controller.addProduct();
                     },
                     text: 'Submit',
                   ),

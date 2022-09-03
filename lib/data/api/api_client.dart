@@ -36,7 +36,7 @@ class ApiClient{
   Future<Either<StatusRequest, Map>> postDataWithFile(String url, Map data, File file) async {
     try {
       if(await checkConnection()){
-        var request = http.MultipartRequest('POST', Uri.parse(url));
+        var request = http.MultipartRequest('POST', Uri.parse(AppConstants.BASE_URL + url));
         var length = await file.length();
         var stream = http.ByteStream(file.openRead());
         var multiPartFile = http.MultipartFile('image', stream, length, filename: basename(file.path));
@@ -56,6 +56,7 @@ class ApiClient{
         return const Left(StatusRequest.offlineFailure);
       }
     } catch (e) {
+      print('ERROR FROM POST DATA WITH FILE => $e');
       return const Left(StatusRequest.serverFailure);
     }
   }
